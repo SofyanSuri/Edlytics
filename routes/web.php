@@ -59,10 +59,16 @@ Route::prefix('student')->group(function () {
     // Public Registration
     Route::get('/register', [StudentController::class, 'showRegistrationForm'])->name('student.register');
     Route::post('/register', [StudentController::class, 'submitRegistration']);
+    Route::get('login', [StudentController::class, 'showLogin'])->name('student.login');
+    Route::post('login', [StudentController::class, 'login'])->name('student.login.post');
+    Route::post('logout', [StudentController::class, 'logout'])->name('student.logout');
 
     // Authenticated Student Routes
     Route::middleware('auth:student')->group(function () {
-        Route::get('/dashboard', [StudentController::class, 'dashboard'])->name('student.dashboard');
+        Route::get('/dashboard', function () {
+            return view('student.dashboard');
+        })->name('student.dashboard');
+    
         Route::get('/request-form', [StudentController::class, 'showRequestForm'])->name('student.request.form');
         Route::post('/submit-request', [StudentController::class, 'submitRequest'])->name('student.request.submit');
         Route::get('/request-history', [StudentController::class, 'requestHistory'])->name('student.request.history');
