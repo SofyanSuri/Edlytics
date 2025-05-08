@@ -8,7 +8,7 @@
         Student Login
     </h1>
     
-    <form method="POST" action="{{ route('auth.login') }}">
+    <form method="POST" action="{{ route('login') }}">
         @csrf
         <div class="mb-5">
             <div class="relative">
