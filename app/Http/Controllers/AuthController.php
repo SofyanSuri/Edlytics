@@ -22,18 +22,28 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+        // Extract credentials from the request
+        $credentials = $request->only('login_id', 'password');
+
         // Attempt login as Admin first
-        if (Auth::guard('admin')->attempt(['username' => $request->login_id, 'password' => $request->password])) {
-            return redirect()->route('admin.dashboard');
-        }
-
-        // Then try Student
-        if (Auth::guard('student')->attempt(['student_id' => $request->login_id, 'password' => $request->password])) {
-            return redirect()->route('student.dashboard');
-        }
-
-        return back()->withErrors(['message' => 'Invalid credentials']);
+    if (Auth::guard('admin')->attempt([
+        'username' => $credentials['login_id'], // admins use username
+        'password' => $credentials['password'],
+    ])) {
+        return redirect()->route('admin.dashboard');
     }
+
+    // Attempt Student Login
+    if (Auth::guard('student')->attempt([
+        'student_id' => $credentials['login_id'], // students use student_id
+        'password' => $credentials['password'],
+    ])) {
+        return redirect()->route('student.dashboard');
+    }
+
+    return back()->withErrors(['login_id' => 'Invalid credentials'])->onlyInput('login_id');
+}
+
 
     public function logout(Request $request)
     {
