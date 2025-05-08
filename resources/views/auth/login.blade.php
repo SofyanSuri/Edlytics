@@ -8,7 +8,7 @@
         Student Login
     </h1>
     
-    <form method="POST" action="{{ route('unified.login') }}">
+    <form method="POST" action="{{ route('auth.login') }}">
         @csrf
         <div class="mb-5">
             <div class="relative">
@@ -22,30 +22,18 @@
                 <div class="mt-1 text-[#F87171] text-sm">{{ $message }}</div>
             @enderror
         </div>
-                <div class="rounded-md -space-y-px">
-                    <div class="mb-5">
-                        <label for="student_id" class="sr-only">Student ID</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#778DA9]" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <input id="student_id" name="student_id" type="text" required class="appearance-none rounded-lg relative block w-full px-3 py-3 pl-10 border border-[#778DA9]/30 placeholder-[#778DA9] text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#415A77] focus:border-transparenttransition duration-200" placeholder="Student ID">
-                        </div>
-                    </div>
-                    <div>
-                        <label for="password" class="sr-only">Password</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#778DA9]" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <input id="password" name="password" type="password" required class="appearance-none rounded-lg relative block w-full px-3 py-3 pl-10 border border-[#778DA9]/30 placeholder-[#778DA9] text-gray-900focus:outline-none focus:ring-2 focus:ring-[#415A77] focus:border-transparenttransition duration-200" placeholder="Password">
-                        </div>
-                    </div>
-                </div>
+        <div class="mb-6">
+            <div class="relative">
+                <input type="password" name="password" placeholder="Password" required 
+                       class="w-full p-3 pl-10 rounded-lg border border-[#415A77] bg-[#0D1B2A]/60 text-[#E0E1DD] placeholder-[#778DA9]/70 focus:outline-none focus:ring-2 focus:ring-[#778DA9] transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-3.5 text-[#778DA9]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+            </div>
+            @error('password')
+                <div class="mt-1 text-[#F87171] text-sm">{{ $message }}</div>
+            @enderror
+        </div>
         
         <div class="flex items-center justify-between mb-6">
             <div class="flex items-center">
